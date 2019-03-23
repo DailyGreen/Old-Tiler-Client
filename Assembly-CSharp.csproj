@@ -62,6 +62,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Tile.cs" />
+    <None Include="Assets\Asset\Kenney Assets\Castle Kit\License.txt" />
     <None Include="Assets\Asset\Kenney Assets\Space Kit\License.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/kyechan99/Documents/Tiler-Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

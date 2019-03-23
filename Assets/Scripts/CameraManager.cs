@@ -6,10 +6,23 @@ public class CameraManager : MonoBehaviour
 {
     public Camera mycam;
     public float moveSpeed;
-    public int cameraLevel = 0;     // 멀리 보이는 정도 0, ~ 5 높을수록 멀리 보임
+    public int cameraLevel = 0;     // 멀리 보이는 정도 0, ~ 6 높을수록 멀리 보임
+    [SerializeField]
+    bool scrollUp = false;
+    [SerializeField]
+    bool scrollDown = false;
+    [SerializeField]
+    bool scrollPos = false;
+    Quaternion beforeRot;
+    public Animator camAnim;
 
     // Update is called once per frame
     void Update()
+    {
+        keyUpdate();
+    }
+
+    void keyUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -27,18 +40,26 @@ public class CameraManager : MonoBehaviour
         {
             transform.position += new Vector3(0, 0, -1);
         }
-
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 6)
+        
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 10)
         {
+            //Debug.Log("DOWN");
             cameraLevel++;
-            mycam.transform.position += new Vector3(0, 3, 0);
-            mycam.transform.Rotate(new Vector3(3, 0, 0));
+            //camAnim.speed = 1;
+            //camAnim.SetInteger("cameraLevel", cameraLevel);
+            mycam.transform.position += new Vector3(0, 0, 1);
+            mycam.transform.Rotate(new Vector3(2, 0, 0));
+            mycam.fieldOfView += 4;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cameraLevel > 0)
         {
+            //Debug.Log("UP");
             cameraLevel--;
-            mycam.transform.position += new Vector3(0, -3, 0);
-            mycam.transform.Rotate(new Vector3(-3, 0, 0));
+            //camAnim.SetInteger("cameraLevel", cameraLevel);
+            //mycam.transform.position += new Vector3(0, -3, 0);
+            mycam.transform.position += new Vector3(0, 0, -1);
+            mycam.transform.Rotate(new Vector3(-2, 0, 0));
+            mycam.fieldOfView -= 4;
         }
     }
 }
