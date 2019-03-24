@@ -1,0 +1,232 @@
+fileFormatVersion: 2
+guid: 054f9e9812c2e4b5794551fb5fe0c8b7
+timeCreated: 1545140422
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: bush
+    100002: bush_2
+    100004: Fir_2
+    100006: Fir_3
+    100008: ground1
+    100010: ground2
+    100012: ground3
+    100014: ground4
+    100016: groundbase
+    100018: house_5
+    100020: //RootNode
+    100022: rock_1
+    100024: rock_2
+    100026: tree_3
+    100028: tree_3_2
+    100030: tree_3_3
+    100032: tree_3_4
+    100034: tree_3_5
+    100036: tree_3_6
+    400000: bush
+    400002: bush_2
+    400004: Fir_2
+    400006: Fir_3
+    400008: ground1
+    400010: ground2
+    400012: ground3
+    400014: ground4
+    400016: groundbase
+    400018: house_5
+    400020: //RootNode
+    400022: rock_1
+    400024: rock_2
+    400026: tree_3
+    400028: tree_3_2
+    400030: tree_3_3
+    400032: tree_3_4
+    400034: tree_3_5
+    400036: tree_3_6
+    2300000: bush
+    2300002: bush_2
+    2300004: Fir_2
+    2300006: Fir_3
+    2300008: ground1
+    2300010: ground2
+    2300012: ground3
+    2300014: ground4
+    2300016: groundbase
+    2300018: house_5
+    2300020: rock_1
+    2300022: rock_2
+    2300024: tree_3
+    2300026: tree_3_2
+    2300028: tree_3_3
+    2300030: tree_3_4
+    2300032: tree_3_5
+    2300034: tree_3_6
+    3300000: bush
+    3300002: bush_2
+    3300004: Fir_2
+    3300006: Fir_3
+    3300008: ground1
+    3300010: ground2
+    3300012: ground3
+    3300014: ground4
+    3300016: groundbase
+    3300018: house_5
+    3300020: rock_1
+    3300022: rock_2
+    3300024: tree_3
+    3300026: tree_3_2
+    3300028: tree_3_3
+    3300030: tree_3_4
+    3300032: tree_3_5
+    3300034: tree_3_6
+    4300000: house_5
+    4300002: Fir_3
+    4300004: Fir_2
+    4300006: rock_2
+    4300008: rock_1
+    4300010: bush
+    4300012: bush_2
+    4300014: tree_3
+    4300016: tree_3_2
+    4300018: tree_3_3
+    4300020: tree_3_4
+    4300022: tree_3_5
+    4300024: tree_3_6
+    4300026: groundbase
+    4300028: ground3
+    4300030: ground2
+    4300032: ground1
+    4300034: ground4
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue
+    second: {fileID: 2100000, guid: 5487184ca5d184aa8be8de413173a4d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brown
+    second: {fileID: 2100000, guid: 65f78eeecc4d24f538ae4dcb9cc31699, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: green1
+    second: {fileID: 2100000, guid: 0229f74d6e8884853a7d1908f914207b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grey
+    second: {fileID: 2100000, guid: 827ffa90bad894f948dff56d6fa399ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: groud green
+    second: {fileID: 2100000, guid: 2dbc64e5b35ed43fe8e2171115d63579, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light grey
+    second: {fileID: 2100000, guid: 360a9ed94549443b1a6cb3beb80eef7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mauve
+    second: {fileID: 2100000, guid: 4471a2863c6cd4dd78264a1e7c295a0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pink
+    second: {fileID: 2100000, guid: d6b85a7731efc4c32aba1edbad62051d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pinkroof
+    second: {fileID: 2100000, guid: 2cc3c8280ff3e414b90a2436fe51e6ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white
+    second: {fileID: 2100000, guid: d84ad7074485b4226ad4079e5182d2d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellow
+    second: {fileID: 2100000, guid: f26f1b580742446e1888ec58222572a5, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

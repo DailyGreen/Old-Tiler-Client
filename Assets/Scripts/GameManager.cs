@@ -11,29 +11,42 @@ public class GameManager : MonoBehaviour
     GameObject[] pointerChild;
 
     int[,] tiles = new int[,] {
-        { 0, 0, 0, 2, -2, -2, -2, -3, -3, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, -1, -1, -2, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, -1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 }
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
     };
+    //int[,] tiles = new int[,] {
+    //    { 0, 0, 0, 2, -2, -2, -2, -3, -3, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, -1, -1, -2, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, -1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 },
+    //    { 0, 0, 0, 2, 1, 1, 1, 1, 1, 3, 3, 5, 4, 4 }
+    //};
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+            pointer.SetActive(false);
+
         if (Input.GetMouseButtonDown(0))
             if (!EventSystem.current.IsPointerOverGameObject())
             {
+                Debug.Log("FFFFFFF");
                 RaycastHit hit;
                 Ray ray = mycam.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, 100.0f))
+                if (Physics.Raycast(ray, out hit, 300.0f))
                     if (hit.transform != null)
                         if (hit.transform.tag.Equals("Tile"))
                         {
@@ -44,7 +57,7 @@ public class GameManager : MonoBehaviour
 
                             if (code >= 0)
                             {
-                                pointer.transform.position = new Vector3(hit.transform.position.x, 0.85f, hit.transform.position.z);
+                                pointer.transform.position = new Vector3(hit.transform.position.x, 1.6f, hit.transform.position.z);
                             }
                             else
                             {
@@ -55,7 +68,7 @@ public class GameManager : MonoBehaviour
                                 arr = new int[6, 2] { { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 } };
                             for (int i = 0; i < 6; i++)
                             {
-                                if (posY + arr[i, 0] >= 0 && posY + arr[i, 0] < 11 &&
+                                if (posY + arr[i, 0] >= 0 && posY + arr[i, 0] < 7 &&
                                     posX + arr[i, 1] >= 0 && posX + arr[i, 1] < 14)
                                 {
                                     if (code >= 0)
@@ -79,6 +92,7 @@ public class GameManager : MonoBehaviour
                                     pointerChild[i].gameObject.SetActive(false);
                                 }
                             }
+                            pointer.SetActive(true);
                         }
             }
     }
