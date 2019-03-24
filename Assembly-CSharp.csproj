@@ -61,6 +61,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Objects\Lomenu UI\3rd Party Assets\Dissolve Edge by Moonflower Carnivore\Scripts\HideIfDisabledDrawer.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Experimental\Trigger Popup\Scripts\TriggerUI.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_BrightnessAdjustment.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_ButtonSound.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_DissolveEdge.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_Exit.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_LaunchURL.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_ManageBlur.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_MenuCamControl.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_PAK.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_PanelAnim.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_PressAnyKey.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_PUBG.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_PUBG_Button.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_Quality.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_RotateObject.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_TiltWindow.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_UIAnimManager.cs" />
+    <Compile Include="Assets\Objects\Lomenu UI\Scripts\LUI_Volume.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -117,6 +136,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\LutGen.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
+    <None Include="Assets\Objects\Lomenu UI\3rd Party Assets\Dissolve Edge by Moonflower Carnivore\Shaders\Transparent_Unlit_DissolveEdge.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ACES.cginc" />
@@ -135,6 +155,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
+    <None Include="Assets\Objects\Lomenu UI\3rd Party Assets\Dissolve Edge by Moonflower Carnivore\readme_DissolveEdge.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
@@ -145,12 +166,14 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
+    <None Include="Assets\Objects\Lomenu UI\Shaders\UI Blur.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
+    <None Include="Assets\Objects\Lomenu UI\Read Me.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/kyechan99/Documents/Tiler-Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
