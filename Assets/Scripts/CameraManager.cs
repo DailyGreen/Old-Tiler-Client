@@ -41,7 +41,7 @@ public class CameraManager : MonoBehaviour
             transform.position += new Vector3(0, 0, -1);
         }
         
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 10)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 15)
         {
             //Debug.Log("DOWN");
             cameraLevel++;
@@ -49,7 +49,7 @@ public class CameraManager : MonoBehaviour
             //camAnim.SetInteger("cameraLevel", cameraLevel);
             mycam.transform.position += new Vector3(0, 0, 1);
             mycam.transform.Rotate(new Vector3(2, 0, 0));
-            mycam.fieldOfView += 4;
+            mycam.fieldOfView += 5;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cameraLevel > 0)
         {
@@ -59,7 +59,7 @@ public class CameraManager : MonoBehaviour
             //mycam.transform.position += new Vector3(0, -3, 0);
             mycam.transform.position += new Vector3(0, 0, -1);
             mycam.transform.Rotate(new Vector3(-2, 0, 0));
-            mycam.fieldOfView -= 4;
+            mycam.fieldOfView -= 5;
         }
     }
 }
