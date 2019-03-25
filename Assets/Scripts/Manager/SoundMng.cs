@@ -10,42 +10,70 @@ public class SoundMng : MonoBehaviour
     [SerializeField]
     AudioSource _audio;
 
+    [SerializeField]
+    AudioClip[] effectClip;
+
+    [SerializeField]
+    AudioSource _effect;
+
+    float audioVolume = 1;
+    float effectVolume = 1;
+
     void Start()
     {
         loginBGM();
     }
 
+    public void changeEffectVolume(float vol)
+    {
+        effectVolume = vol;
+        _effect.volume = vol;
+    }
+    public void changeAudioVolume(float vol)
+    {
+        audioVolume = vol;
+        _audio.volume = vol;
+    }
+
     public void loginBGM()
     {
-        _audio.clip = audioClip[0];
-        _audio.volume = 0.4f;
-        _audio.Play();  // 로고 배경 음악
+        _audio.loop = true;
+        //_audio.clip = audioClip[0];
+        //_audio.volume = audioVolume;
+        //_audio.Play();  // 로고 배경 음악
+        StartCoroutine(changeTo(audioClip[0]));
     }
 
-    public void readyBGM()
+    public void roomBGM()
     {
-        StartCoroutine(changeTo(audioClip[1], 1));
+        _audio.loop = true;
+        //_audio.clip = audioClip[1];
+        //_audio.volume = audioVolume;
+        //_audio.Play();
+        StartCoroutine(changeTo(audioClip[1]));
     }
 
-    public void gameBGM()
+    public void uiBTClick()
     {
-        StartCoroutine(changeTo(audioClip[2], 0.4f));
+        _effect.clip = effectClip[0];
+        _effect.volume = effectVolume;
+        _effect.Play();
     }
 
-    IEnumerator changeTo(AudioClip clip, float maxVol)
+    IEnumerator changeTo(AudioClip clip)
     {
         while (_audio.volume > 0)
         {
             _audio.volume -= 0.05f;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
         }
         _audio.Stop();
         _audio.clip = clip;
         _audio.Play();
-        while (_audio.volume < maxVol)
+        while (_audio.volume < audioVolume)
         {
             _audio.volume += 0.05f;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }

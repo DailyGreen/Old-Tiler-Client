@@ -127,8 +127,12 @@
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Scripts\Manager\CameraMng.cs" />
     <Compile Include="Assets\Scripts\Manager\GameMng.cs" />
+    <Compile Include="Assets\Scripts\Manager\NetworkMng.cs" />
+    <Compile Include="Assets\Scripts\Manager\RoomMng.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundMng.cs" />
+    <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
+    <Compile Include="Assets\Scripts\User.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\Objects\Castle\License.txt" />
