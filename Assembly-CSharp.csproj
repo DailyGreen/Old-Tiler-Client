@@ -125,8 +125,9 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
-    <Compile Include="Assets\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\CameraMng.cs" />
+    <Compile Include="Assets\Scripts\Manager\GameMng.cs" />
+    <Compile Include="Assets\Scripts\Manager\SoundMng.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
@@ -137,6 +138,7 @@
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Objects\Lomenu UI\3rd Party Assets\Dissolve Edge by Moonflower Carnivore\Shaders\Transparent_Unlit_DissolveEdge.shader" />
+    <None Include="Assets\Objects\Space\License.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ACES.cginc" />
