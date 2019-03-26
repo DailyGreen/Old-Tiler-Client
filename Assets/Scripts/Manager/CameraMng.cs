@@ -22,26 +22,46 @@ public class CameraMng : MonoBehaviour
         keyUpdate();
     }
 
+    Vector3[] mainCamPos = { new Vector3(0, 0, 0), new Vector3(0, 9, -16), new Vector3(0, 28, -40) };
+    Vector3[] mainCamRot = { new Vector3(25, 0, 0), new Vector3(27, 0, 0), new Vector3(34, 0, 0) };
+
     void keyUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += new Vector3(0, 0, 1);
+            transform.position += new Vector3(0, 0, 2);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += new Vector3(-1, 0, 0);
+            transform.position += new Vector3(-2, 0, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(1, 0, 0);
+            transform.position += new Vector3(2, 0, 0);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position += new Vector3(0, 0, -1);
+            transform.position += new Vector3(0, 0, -2);
         }
-        
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 10)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 12)
+        {
+            cameraLevel++;
+            mycam.transform.position += new Vector3(0, 7, 7);
+            //transform.position += new Vector3(0, 0, 7);
+            //if (cameraLevel < 8)
+                mycam.transform.Rotate(new Vector3(6, 0, 0));
+            //mycam.transform.Rotate(new Vector3(3, 0, 0));
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cameraLevel > 0)
+        {
+            cameraLevel--;
+            mycam.transform.position += new Vector3(0, -7, -7);
+            //transform.position += new Vector3(0, 0, -7);
+            //if (cameraLevel < 8)
+            mycam.transform.Rotate(new Vector3(-6, 0, 0));
+            //mycam.transform.Rotate(new Vector3(-3, 0, 0));
+        }
+        /*if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraLevel < 10)
         {
             //Debug.Log("DOWN");
             cameraLevel++;
@@ -62,6 +82,6 @@ public class CameraMng : MonoBehaviour
             mycam.transform.position += new Vector3(0, 0, -5);
             mycam.transform.Rotate(new Vector3(-10, 0, 0));
             mycam.fieldOfView -= 8;
-        }
+        }*/
     }
 }
