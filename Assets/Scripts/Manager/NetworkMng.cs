@@ -14,7 +14,7 @@ public class NetworkMng : MonoBehaviour
 {
     static Socket socket = null;
     public string address = "127.0.0.1";   // 주소, 서버 주소와 같게 할 것
-    int port = 10000;               // 포트 번호, 서버포트와 같게 할 것
+    int port = 8080;               // 포트 번호, 서버포트와 같게 할 것
     byte[] buf = new byte[4096];
     int recvLen = 0;
     public int myRoom = 0;
@@ -56,6 +56,8 @@ public class NetworkMng : MonoBehaviour
 
         IPAddress serverIP = IPAddress.Parse(address);
         int serverPort = Convert.ToInt32(port);
+        Debug.Log(address);
+        Debug.Log(serverPort);
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 10000);      // 송신 제한시간 10초
         socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);   // 수신 제한시간 10초
@@ -278,7 +280,7 @@ public class NetworkMng : MonoBehaviour
                     tempUser.nickName = txt[3];
                     v_user.Add(tempUser);
                 }
-                _roomGM.intoRoom();
+                _roomGM.intoRoom(txt[4]);
                 _roomGM.roomRefresh();
             }
             else if (txt[1].Equals("LIMIT"))

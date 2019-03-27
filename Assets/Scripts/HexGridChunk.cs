@@ -37,12 +37,15 @@ public class HexGridChunk : MonoBehaviour {
 	}
 
 	void LateUpdate () {
+        Debug.Log("LATE UPDATE");
 		Triangulate();
 		enabled = false;
 	}
 
-	public void Triangulate () {
-		terrain.Clear();
+	public void Triangulate ()
+    {
+        Debug.Log("Triangulate");
+        terrain.Clear();
 		rivers.Clear();
 		roads.Clear();
 		water.Clear();
@@ -61,8 +64,10 @@ public class HexGridChunk : MonoBehaviour {
 		features.Apply();
 	}
 
-	void Triangulate (HexCell cell) {
-		for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++) {
+	void Triangulate (HexCell cell)
+    {
+        Debug.Log("Triangulate cell");
+        for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++) {
 			Triangulate(d, cell);
 		}
 		if (!cell.IsUnderwater) {

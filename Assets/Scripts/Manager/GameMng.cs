@@ -42,7 +42,6 @@ public class GameMng : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("FFFFFFF");
                 RaycastHit hit;
                 Ray ray = mycam.ScreenPointToRay(Input.mousePosition);
 

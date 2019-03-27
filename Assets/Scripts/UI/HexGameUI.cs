@@ -45,6 +45,7 @@ public class HexGameUI : MonoBehaviour {
             Debug.Log("CC : " + currentCell.coordinates);
 			selectedUnit = currentCell.Unit;
 		}
+        //currentCell.SpecialIndex = 4;
 	}
 
 	void DoPathfinding () {
@@ -59,8 +60,11 @@ public class HexGameUI : MonoBehaviour {
 	}
 
 	void DoMove () {
+        //if (selectedUnit.imStatic)
+        //    return;
 		if (grid.HasPath) {
-			selectedUnit.Travel(grid.GetPath());
+            if (!selectedUnit.imStatic)
+                selectedUnit.Travel(grid.GetPath());
 			grid.ClearPath();
 		}
 	}

@@ -261,7 +261,9 @@ public class HexCell : MonoBehaviour {
 
 	public HexUnit Unit { get; set; }
 
-	public HexCell PathFrom { get; set; }
+    public HexUnit Built { get; set; }
+
+    public HexCell PathFrom { get; set; }
 
 	public int SearchHeuristic { get; set; }
 
@@ -486,16 +488,24 @@ public class HexCell : MonoBehaviour {
 			}
 			if (Unit) {
 				Unit.ValidateLocation();
-			}
-		}
+            }
+            if (Built)
+            {
+                Built.ValidateLocation();
+            }
+        }
 	}
 
 	void RefreshSelfOnly () {
 		chunk.Refresh();
 		if (Unit) {
 			Unit.ValidateLocation();
-		}
-	}
+        }
+        if (Built)
+        {
+            Built.ValidateLocation();
+        }
+    }
 
 	public void Save (BinaryWriter writer) {
 		writer.Write((byte)terrainTypeIndex);

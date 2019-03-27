@@ -181,12 +181,16 @@ public class RoomMng : MonoBehaviour
     public void intoRoom()
     {
         checkPWpop.SetActive(false);
-        //lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         players[0].SetActive(true);
         playersName[0].text = NetworkMng.getInstance.nickName;
         roomInfo.text = roomName;
         NetworkMng.getInstance._soundGM.roomBGM();
+    }
+    public void intoRoom(string roomName)
+    {
+        intoRoom();
+        roomInfo.text = roomName;
     }
 
     // 스스로 방 만들고 나서 호출

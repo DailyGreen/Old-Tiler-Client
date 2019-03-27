@@ -9,8 +9,11 @@ public class HexUnit : MonoBehaviour {
 	const float travelSpeed = 4f;
 
 	public static HexUnit unitPrefab;
+    public static HexUnit builtPrefab;
 
-	public HexGrid Grid { get; set; }
+    public bool imStatic = false;
+
+    public HexGrid Grid { get; set; }
 
 	public HexCell Location {
 		get {
@@ -22,7 +25,8 @@ public class HexUnit : MonoBehaviour {
 				location.Unit = null;
 			}
 			location = value;
-			value.Unit = this;
+            //if (!imStatic)
+		    value.Unit = this;
 			Grid.IncreaseVisibility(value, VisionRange);
 			transform.localPosition = value.Position;
 			Grid.MakeChildOfColumn(transform, value.ColumnIndex);
@@ -41,9 +45,10 @@ public class HexUnit : MonoBehaviour {
 		}
 	}
 
+    // (움직이고 싶은 칸 수 + 1) * 4
 	public int Speed {
 		get {
-			return 24;
+			return 16;
 		}
 	}
 
@@ -63,15 +68,22 @@ public class HexUnit : MonoBehaviour {
 
 	public bool IsValidDestination (HexCell cell) {
         // 경로 찾는 함수
-		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
-	}
+		//return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
+        return cell.IsExplored && !cell.IsUnderwater;
+    }
 
-	public void Travel (List<HexCell> path) {
-		location.Unit = null;
+	public void Travel (List<HexCell> path)
+    {
+        // 한계치를 넘으면 뒤에서 자름
+        // 움직이고 싶은 칸 수의 + 1
+        if (path.Count >= 4)
+            path = path.GetRange(0, 4);
+
+        location.Unit = null;
 		location = path[path.Count - 1];
 		location.Unit = this;
-		pathToTravel = path;
-		StopAllCoroutines();
+        pathToTravel = path;
+        StopAllCoroutines();
 		StartCoroutine(TravelPath());
 	}
 

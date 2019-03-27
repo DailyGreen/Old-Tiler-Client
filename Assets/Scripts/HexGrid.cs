@@ -14,8 +14,9 @@ public class HexGrid : MonoBehaviour {
 	public Text cellLabelPrefab;
 	public HexGridChunk chunkPrefab;
 	public HexUnit unitPrefab;
+    public HexUnit builtPrefab;
 
-	public Texture2D noiseSource;
+    public Texture2D noiseSource;
 
 	public int seed;
 
@@ -41,31 +42,49 @@ public class HexGrid : MonoBehaviour {
 	int currentCenterColumnIndex = -1;
 
 	List<HexUnit> units = new List<HexUnit>();
+    List<HexUnit> builts = new List<HexUnit>();
 
-	HexCellShaderData cellShaderData;
+    HexCellShaderData cellShaderData;
 
 	void Awake () {
 		HexMetrics.noiseSource = noiseSource;
 		HexMetrics.InitializeHashGrid(seed);
-		HexUnit.unitPrefab = unitPrefab;
-		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
+        HexUnit.unitPrefab = unitPrefab;
+        HexUnit.builtPrefab = builtPrefab;
+        cellShaderData = gameObject.AddComponent<HexCellShaderData>();
 		cellShaderData.Grid = this;
 		CreateMap(cellCountX, cellCountZ, wrapping);
 	}
 
 	public void AddUnit (HexUnit unit, HexCell location, float orientation) {
 		units.Add(unit);
+        unit.imStatic = false;
 		unit.Grid = this;
 		unit.Location = location;
 		unit.Orientation = orientation;
 	}
 
-	public void RemoveUnit (HexUnit unit) {
+    public void AddBuilt(HexUnit built, HexCell location, float orientation)
+    {
+        builts.Add(built);
+        built.imStatic = true;
+        built.Grid = this;
+        built.Location = location;
+        built.Orientation = orientation;
+    }
+
+    public void RemoveUnit (HexUnit unit) {
 		units.Remove(unit);
 		unit.Die();
-	}
+    }
 
-	public void MakeChildOfColumn (Transform child, int columnIndex) {
+    public void RemoveBuilt(HexUnit built)
+    {
+        builts.Remove(built);
+        built.Die();
+    }
+
+    public void MakeChildOfColumn (Transform child, int columnIndex) {
 		child.SetParent(columns[columnIndex], false);
 	}
 
@@ -137,7 +156,8 @@ public class HexGrid : MonoBehaviour {
 			HexMetrics.noiseSource = noiseSource;
 			HexMetrics.InitializeHashGrid(seed);
 			HexUnit.unitPrefab = unitPrefab;
-			HexMetrics.wrapSize = wrapping ? cellCountX : 0;
+            HexUnit.builtPrefab = builtPrefab;
+            HexMetrics.wrapSize = wrapping ? cellCountX : 0;
 			ResetVisibility();
 		}
 	}
