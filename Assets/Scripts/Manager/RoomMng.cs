@@ -17,6 +17,8 @@ public class RoomMng : MonoBehaviour
     GameObject roomList;               // 발견된 방 리스트들
     [SerializeField]
     GameObject checkPWpop;                  // 비밀번호 체크 팝업
+    [SerializeField]
+    Animator pwPopAnim;
 
     //[HideInInspector]
     public string roomPW;
@@ -30,7 +32,7 @@ public class RoomMng : MonoBehaviour
     GameObject roomPanel;
     [SerializeField]
     GameObject lobbyPanel;
-
+    
     // Room일때(같은 방에 있는 유저 정보 : 0은 나임)
     [SerializeField]
     UnityEngine.UI.Text roomInfo;
@@ -131,6 +133,10 @@ public class RoomMng : MonoBehaviour
             this.roomPW = "";
             NetworkMng.getInstance.SendMsg(string.Format("INTO_ROOM:{0}", roomIdx));
         }
+        else
+        {
+            pwPopAnim.SetTrigger("Wrong");
+        }
     }
 
     /**
@@ -151,6 +157,11 @@ public class RoomMng : MonoBehaviour
         }
     }
 
+    public void fastGameStart()
+    {
+        NetworkMng.getInstance.SendMsg(string.Format("FAST_ROOM"));
+    }
+
     public void exitRoom()
     {
         gameStartBT.interactable = false;
@@ -169,6 +180,7 @@ public class RoomMng : MonoBehaviour
     // 다른 사람 방에 들어가고 나서 호출
     public void intoRoom()
     {
+        checkPWpop.SetActive(false);
         //lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         players[0].SetActive(true);

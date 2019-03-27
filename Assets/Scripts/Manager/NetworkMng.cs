@@ -30,6 +30,11 @@ public class NetworkMng : MonoBehaviour
     public RoomMng _roomGM;
     public SoundMng _soundGM;
 
+    [SerializeField]
+    GameObject profile;
+    [SerializeField]
+    UnityEngine.UI.Text profileNickname;
+
     static NetworkMng _instance;
     public static NetworkMng getInstance
     {
@@ -63,6 +68,7 @@ public class NetworkMng : MonoBehaviour
 
             loadingPanel.SetActive(false);
             mainPanel.SetActive(true);
+            profile.SetActive(true);
         }
         catch (SocketException err)
         {
@@ -82,20 +88,23 @@ public class NetworkMng : MonoBehaviour
      */
     public void Login()
     {
-        loginPanel.SetActive(false);
-        loadingPanel.SetActive(true);
-        loadingAnim.SetTrigger("Loading");
-        
-        if (checkNetwork())
+        if (!nickName.Equals("_") && !nickName.Equals(""))
         {
-            Logout();       // 이중 접속 방지
+            loginPanel.SetActive(false);
+            loadingPanel.SetActive(true);
+            loadingAnim.SetTrigger("Loading");
 
-            StartCoroutine("LoginWaiting");
-        }
-        else
-        {
-            loginPanel.SetActive(true);
-            loadingPanel.SetActive(false);
+            if (checkNetwork())
+            {
+                Logout();       // 이중 접속 방지
+
+                StartCoroutine("LoginWaiting");
+            }
+            else
+            {
+                loginPanel.SetActive(true);
+                loadingPanel.SetActive(false);
+            }
         }
     }
 
@@ -214,6 +223,7 @@ public class NetworkMng : MonoBehaviour
         {
             Debug.Log("Connected.");
             SendMsg(string.Format("LOGIN:{0}", nickName));
+            profileNickname.text = nickName;
         }
         // 방에 있던 사람 중 누군가 나감
         else if (txt[0].Equals("SOMEONE_EXIT"))
