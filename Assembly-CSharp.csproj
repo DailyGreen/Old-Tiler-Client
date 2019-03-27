@@ -144,7 +144,6 @@
     <Compile Include="Assets\Scripts\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\HexUnit.cs" />
     <Compile Include="Assets\Scripts\ListPool.cs" />
-    <Compile Include="Assets\Scripts\Manager\CameraMng.cs" />
     <Compile Include="Assets\Scripts\Manager\GameMng.cs" />
     <Compile Include="Assets\Scripts\Manager\NetworkMng.cs" />
     <Compile Include="Assets\Scripts\Manager\RoomMng.cs" />

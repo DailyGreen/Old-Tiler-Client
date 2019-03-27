@@ -49,7 +49,7 @@ public class HexUnit : MonoBehaviour {
 
 	public int VisionRange {
 		get {
-			return 3;
+			return 1;
 		}
 	}
 
@@ -62,6 +62,7 @@ public class HexUnit : MonoBehaviour {
 	}
 
 	public bool IsValidDestination (HexCell cell) {
+        // 경로 찾는 함수
 		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
 	}
 

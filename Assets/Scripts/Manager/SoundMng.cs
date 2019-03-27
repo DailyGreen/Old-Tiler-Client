@@ -52,6 +52,14 @@ public class SoundMng : MonoBehaviour
         //_audio.Play();
         StartCoroutine(changeTo(audioClip[1]));
     }
+    public void waitBGM()
+    {
+        _audio.Stop();
+        _audio.volume = audioVolume;
+        _audio.loop = false;
+        _audio.clip = audioClip[2];
+        _audio.Play();
+    }
 
     public void uiBTClick()
     {

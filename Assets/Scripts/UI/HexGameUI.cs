@@ -40,7 +40,9 @@ public class HexGameUI : MonoBehaviour {
 	void DoSelection () {
 		grid.ClearPath();
 		UpdateCurrentCell();
-		if (currentCell) {
+
+        if (currentCell) {
+            Debug.Log("CC : " + currentCell.coordinates);
 			selectedUnit = currentCell.Unit;
 		}
 	}

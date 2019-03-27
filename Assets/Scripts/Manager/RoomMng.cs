@@ -144,10 +144,10 @@ public class RoomMng : MonoBehaviour
 
     public void gameStart()
     {
-        if (nowMem.Equals("1"))
+        if (!nowMem.Equals("1"))
         {
             // 혼자만 아니면 게임 시작 가능
-            NetworkMng.getInstance.SendMsg(string.Format("GAME_START:{0}", NetworkMng.getInstance.myRoom));
+            NetworkMng.getInstance.SendMsg(string.Format("GAME_START"));
         }
     }
 

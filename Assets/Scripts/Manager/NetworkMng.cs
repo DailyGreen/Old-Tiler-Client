@@ -228,6 +228,12 @@ public class NetworkMng : MonoBehaviour
             }
             _roomGM.roomRefresh();
         }
+        else if (txt[0].Equals("GAME_START"))
+        {
+            Debug.Log("GAME START !!!");
+            _soundGM.waitBGM();
+            SceneManager.LoadScene("InGame");
+        }
         // 직접 방 생성후 이동
         else if (txt[0].Equals("CHANGE_ROOM"))
         {

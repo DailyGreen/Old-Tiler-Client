@@ -309,6 +309,7 @@ public class HexGrid : MonoBehaviour {
 		List<HexCell> path = ListPool<HexCell>.Get();
 		for (HexCell c = currentPathTo; c != currentPathFrom; c = c.PathFrom) {
 			path.Add(c);
+            Debug.Log("POSITION : " + c.coordinates);
 		}
 		path.Add(currentPathFrom);
 		path.Reverse();
