@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HexGameUI : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class HexGameUI : MonoBehaviour {
 
 	HexUnit selectedUnit;
     public static bool wantToBuilt = false;
+    public Text cellinfoText = null;
     
 	public void SetEditMode (bool toggle) {
 		enabled = !toggle;
@@ -30,7 +32,9 @@ public class HexGameUI : MonoBehaviour {
 		if (!EventSystem.current.IsPointerOverGameObject()) {
 			if (Input.GetMouseButtonDown(0)) {
 				DoSelection();
-			}
+
+
+            }
 			else if (selectedUnit)
             {
                 if (Input.GetMouseButtonDown(1))
@@ -49,6 +53,8 @@ public class HexGameUI : MonoBehaviour {
 		grid.ClearPath();
 		UpdateCurrentCell();
 
+        GetInfo();
+
         if (currentCell) {
             Debug.Log("CC : " + currentCell.coordinates);
 			selectedUnit = currentCell.Unit;
@@ -56,7 +62,27 @@ public class HexGameUI : MonoBehaviour {
         //currentCell.SpecialIndex = 4;
 	}
 
-	void DoPathfinding () {
+    void GetInfo()
+    {
+        HexCell cell = grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
+        switch(cell.CustomCode)
+        {
+            case -1:
+                cellinfoText.text = "건설중";
+                break;
+            case 1:
+                cellinfoText.text = "성";
+                break;
+            case 2:
+                cellinfoText.text = "일꾼건물";
+                break;
+            default:
+                cellinfoText.text = "평지";
+                break;
+        }
+    }
+
+    void DoPathfinding () {
 		if (UpdateCurrentCell()) {
 			if (currentCell && selectedUnit.IsValidDestination(currentCell)) {
 				grid.FindPath(selectedUnit.Location, currentCell, selectedUnit);
@@ -68,7 +94,7 @@ public class HexGameUI : MonoBehaviour {
 		}
 	}
 
-	void DoMove () {
+    void DoMove () {
         //if (selectedUnit.imStatic)
         //    return;
 		if (grid.HasPath) {

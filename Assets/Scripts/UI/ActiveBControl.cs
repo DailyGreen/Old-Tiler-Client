@@ -46,8 +46,8 @@ public class ActiveBControl : MonoBehaviour
         if (e_active.Equals(E_Active.E_CANCEL)) { CancelAction(); }
         else
         {
-            if (GameMng.I.getcode >= 15) { UnitsAction(); }
-            else if (GameMng.I.getcode < 15 && GameMng.I.getcode > 0) { BuiltAction(); }
+            if (GameMng.I.GetCode >= 15) { UnitsAction(); }
+            else if (GameMng.I.GetCode < 15 && GameMng.I.GetCode > 0) { BuiltAction(); }
             else { CancelAction(); }
         }
     }
@@ -65,7 +65,7 @@ public class ActiveBControl : MonoBehaviour
         Buttons[Buttons.Length - 1].SetActive(true);
         for (int i = 0; i < Buttons.Length - 1; i++)
         {
-            if (GameMng.I.getcode.Equals(1))
+            if (GameMng.I.GetCode.Equals(1))
             {
                 if (i.Equals(0)) { Buttons[i].SetActive(true); }
                 else { Buttons[i].SetActive(false); }
@@ -80,7 +80,7 @@ public class ActiveBControl : MonoBehaviour
         Buttons[Buttons.Length - 1].SetActive(true);
         for (int i = 0; i < Buttons.Length; i++)
         {
-            if (GameMng.I.getcode.Equals(1))
+            if (GameMng.I.GetCode.Equals(1))
             {
                 if (!i.Equals(0) && !i.Equals(3))
                 {

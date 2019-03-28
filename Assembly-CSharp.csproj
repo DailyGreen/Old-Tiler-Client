@@ -149,7 +149,9 @@
     <Compile Include="Assets\Scripts\Manager\NetworkMng.cs" />
     <Compile Include="Assets\Scripts\Manager\RoomMng.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundMng.cs" />
+    <Compile Include="Assets\Scripts\ProduceWorkMan.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
+    <Compile Include="Assets\Scripts\SObject.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\UI\ActiveBControl.cs" />
     <Compile Include="Assets\Scripts\UI\HexGameUI.cs" />

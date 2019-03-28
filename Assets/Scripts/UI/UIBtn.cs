@@ -10,7 +10,11 @@ public class UIBtn : MonoBehaviour
 {
     public void MakeWorkman()
     {
-        //GM.GameMng.I.produceworkman.BuildInit();
+        if (GameMng.I.Minerals >= 50)
+        {
+            GameMng.I.Minerals -= 50;
+            GameMng.I.produceworkman.BuildInit();
+        }
     }
     public void MoveBtn()
     {

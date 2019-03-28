@@ -25,16 +25,23 @@ public class GameMng : MonoBehaviour
     {
         _Instance = this;
     }
-    public HexMapEditor hexmepeditor;
     public HexGrid hexgrid;
     public int GetCode
     {
         get
         {
-            return hexgrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition)).CustomCode;
+            return GetCellUnderCursor() == null ? 0 : GetCellUnderCursor().CustomCode;
         }
     }
-    public int getcode;
+    public HexCell GetCellUnderCursor()
+    {
+        return hexgrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
+    }
+
+    public E_Active e_btnActive;
+    public int Minerals = 50;
+
+    public ProduceWorkMan produceworkman;
 
     // 턴 세기
     public void AddDelegate(CountTurn Method)
@@ -44,6 +51,19 @@ public class GameMng : MonoBehaviour
     public void RemoveDelegate(CountTurn Method)
     {
         this.countDel -= Method;
+    }
+
+    public void CreateBuilt(E_CustomCode e_custom)
+    {
+        HexCell cell = GetCellUnderCursor();
+        if (cell && !cell.Unit)
+        {
+            if ((int)e_custom < 15)
+            {
+                cell.CustomCode = -1;     // 건설중인 코드(보류)
+            }
+            hexgrid.AddBuilt(Instantiate(HexUnit.builtPrefab), cell, 0);
+        }
     }
 
 }

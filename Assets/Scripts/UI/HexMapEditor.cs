@@ -142,7 +142,7 @@ public class HexMapEditor : MonoBehaviour {
                 }
                 else
                 {
-                    CreateBuilt();
+                    //CreateBuilt(E_CustomCode.E_AIRPORT);
                 }
                 return;
             }
@@ -165,14 +165,19 @@ public class HexMapEditor : MonoBehaviour {
             );
         }
     }
-    void CreateBuilt() {
-		HexCell cell = GetCellUnderCursor();
-		if (cell && !cell.Unit) {
-			hexGrid.AddBuilt(Instantiate(HexUnit.builtPrefab), cell, 0);
-		}
-	}
 
-	void DestroyUnit () {
+    public void CreateBuilt(E_CustomCode e_custom)
+    {
+        HexCell cell = GetCellUnderCursor();
+        if (cell && !cell.Unit)
+        {
+            //if ((int)e_custom < 15) { cell.CustomCode = -1; }    // 건설중인 코드(보류)
+            cell.CustomCode = (int)e_custom;
+            hexGrid.AddBuilt(Instantiate(HexUnit.builtPrefab), cell, 0);
+        }
+    }
+
+    void DestroyUnit () {
 		HexCell cell = GetCellUnderCursor();
 		if (cell && cell.Unit) {
 			hexGrid.RemoveUnit(cell.Unit);
