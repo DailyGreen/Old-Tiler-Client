@@ -9,7 +9,7 @@ public class HexGameUI : MonoBehaviour {
 	HexCell currentCell;
 
 	HexUnit selectedUnit;
-    public static bool wantToBuilt = false;
+    //public static bool wantToBuilt = false;
     public Text cellinfoText = null;
     
 	public void SetEditMode (bool toggle) {
@@ -25,25 +25,63 @@ public class HexGameUI : MonoBehaviour {
 	}
 
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            wantToBuilt = !wantToBuilt;
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    wantToBuilt = !wantToBuilt;
+        //}
 		if (!EventSystem.current.IsPointerOverGameObject()) {
-			if (Input.GetMouseButtonDown(0)) {
+			if (Input.GetMouseButtonDown(0) && GameMng.I.e_btnActive.Equals(E_Active.E_NONE)) {
 				DoSelection();
 
-
+                if (currentCell.Unit)
+                    Debug.Log("I SELECTE " + currentCell.Unit.code);
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                // 모든 행동 취소 : 마우스 우클릭
+                GameMng.I.e_btnActive = E_Active.E_NONE;
+                bControler.CancelAction();
+                grid.ClearPath();
+                selectedUnit = null;
             }
 			else if (selectedUnit)
             {
-                if (Input.GetMouseButtonDown(1))
+                // 선택한 유닛이 움직이는 유닛이라면 바로 이동 경로 찾게 해주기
+                if (!selectedUnit.imStatic)
                 {
-                    DoMove();
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Debug.Log("MOVE");
+                        DoMove();
+                    }
+                    else
+                    {
+                        DoPathfinding();
+                    }
                 }
+                // 선택한 유닛이 건물이라면 바로 이동 경로 찾게 안해줌
                 else
                 {
-                    DoPathfinding();
+                    // 일꾼 생성하려고 한다면
+                    if (GameMng.I.e_btnActive.Equals(E_Active.E_WORKMAN))
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            Debug.Log("일꾼 여기에 생산해 주세요!!!!!!!!!!");
+                            GameMng.I.e_btnActive = E_Active.E_NONE;
+                            DoBuilt();
+                            bControler.CancelAction();
+                        }
+                        else if (Input.GetMouseButtonDown(1))
+                        {
+                            Debug.Log("명령을 취소했습니다.");
+                            bControler.CancelAction();
+                        }
+                        else
+                        {
+                            DoPathfinding();
+                        }
+                    }
                 }
             }
 		}
@@ -56,29 +94,41 @@ public class HexGameUI : MonoBehaviour {
         GetInfo();
 
         if (currentCell) {
-            Debug.Log("CC : " + currentCell.coordinates);
+            //Debug.Log("CC : " + currentCell.coordinates);
 			selectedUnit = currentCell.Unit;
 		}
         //currentCell.SpecialIndex = 4;
 	}
+    [SerializeField]
+    ActiveBControl bControler;
 
     void GetInfo()
     {
         HexCell cell = grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
-        switch(cell.CustomCode)
+        if (cell.Unit)
         {
-            case -1:
-                cellinfoText.text = "건설중";
-                break;
-            case 1:
-                cellinfoText.text = "성";
-                break;
-            case 2:
-                cellinfoText.text = "일꾼건물";
-                break;
-            default:
-                cellinfoText.text = "평지";
-                break;
+            bControler.BuiltAction(cell.Unit.code);
+            switch (cell.Unit.code)
+            {
+                case E_CustomCode.E_BUILDING:
+                    cellinfoText.text = "건설중";
+                    break;
+                case E_CustomCode.E_CASTLE:
+                    cellinfoText.text = "성";
+                    break;
+                case E_CustomCode.E_WORKMAN:
+                    GameMng.I.e_btnActive = E_Active.E_MOVE;
+                    cellinfoText.text = "일꾼";
+                    break;
+                default:
+                    cellinfoText.text = "평지";
+                    break;
+            }
+        }
+        else
+        {
+            bControler.CancelAction();
+            cellinfoText.text = "아무것도 아님 (UI 끄기)";
         }
     }
 
@@ -94,13 +144,24 @@ public class HexGameUI : MonoBehaviour {
 		}
 	}
 
+    void DoBuilt ()
+    {
+        if (grid.HasPath)
+        {
+            //Debug.Log("BUILT PATH : " + grid.GetPath().Count);
+            // TODO : 
+            grid.ClearPath();
+            selectedUnit = null;
+            GameMng.I.e_btnActive = E_Active.E_NONE;
+        }
+    }
     void DoMove () {
-        //if (selectedUnit.imStatic)
-        //    return;
 		if (grid.HasPath) {
             if (!selectedUnit.imStatic)
                 selectedUnit.Travel(grid.GetPath());
 			grid.ClearPath();
+            selectedUnit = null;
+            GameMng.I.e_btnActive = E_Active.E_NONE;
 		}
 	}
 

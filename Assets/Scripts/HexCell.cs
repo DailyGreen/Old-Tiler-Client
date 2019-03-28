@@ -259,19 +259,20 @@ public class HexCell : MonoBehaviour {
 		}
 	}
 
-    public int CustomCode
-    {
-        get
-        {
-            return customcode;
-        }
-        set
-        {
-            customcode = value;
-        }
-    }
+    //public int CustomCode
+    //{
+    //    get
+    //    {
+    //        return customcode;
+    //    }
+    //    set
+    //    {
+    //        customcode = value;
+    //    }
+    //}
 
-    int customcode;
+    //[SerializeField]
+    //int customcode;
 
 	public HexUnit Unit { get; set; }
 

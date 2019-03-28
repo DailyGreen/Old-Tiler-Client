@@ -9,6 +9,8 @@ public class GameMng : MonoBehaviour
     public CountTurn countDel;
     private static GameMng _Instance = null;
 
+    //public bool wantToBuilt = false;
+
     public static GameMng I
     {
         get
@@ -26,22 +28,28 @@ public class GameMng : MonoBehaviour
         _Instance = this;
     }
     public HexGrid hexgrid;
-    public int GetCode
+    public E_CustomCode GetCode
     {
         get
         {
-            return GetCellUnderCursor() == null ? 0 : GetCellUnderCursor().CustomCode;
+            if (GetCellUnderCursor().Equals(null))
+                return 0;
+            if (GetCellUnderCursor().Unit)
+                return GetCellUnderCursor().Unit.code;
+            return 0;
         }
     }
     public HexCell GetCellUnderCursor()
     {
-        return hexgrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
+        if (!EventSystem.current.IsPointerOverGameObject())
+            return hexgrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
+        return null;
     }
 
     public E_Active e_btnActive;
-    public int Minerals = 50;
+    public int Minerals = 450;
 
-    public ProduceWorkMan produceworkman;
+    //public ProduceWorkMan produceworkman;
 
     // 턴 세기
     public void AddDelegate(CountTurn Method)
@@ -53,17 +61,30 @@ public class GameMng : MonoBehaviour
         this.countDel -= Method;
     }
 
+    [SerializeField]
+    HexUnit[] unitsPrefab;
+    [SerializeField]
+    HexUnit[] builtsPrefab;
+
     public void CreateBuilt(E_CustomCode e_custom)
     {
         HexCell cell = GetCellUnderCursor();
         if (cell && !cell.Unit)
         {
-            if ((int)e_custom < 15)
+            /*if ((int)e_custom < 15)
             {
                 cell.CustomCode = -1;     // 건설중인 코드(보류)
-            }
-            hexgrid.AddBuilt(Instantiate(HexUnit.builtPrefab), cell, 0);
+            }*/
+            hexgrid.AddBuilt(Instantiate(builtsPrefab[(int)e_custom - 1]), cell, 0, e_custom);
         }
     }
 
+    public void CreateUnit(E_CustomCode e_custom)
+    {
+        HexCell cell = GetCellUnderCursor();
+        if (cell && !cell.Unit)
+        {
+            hexgrid.AddUnit(Instantiate(unitsPrefab[(int)e_custom - (int)E_CustomCode.E_NOW_CHARACTER - 1]), cell, 0, e_custom);
+        }
+    }
 }

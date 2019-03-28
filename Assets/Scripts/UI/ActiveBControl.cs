@@ -28,9 +28,6 @@ public class ActiveBControl : MonoBehaviour
     float Result = 0f;
     E_Active e_active;
 
-    [SerializeField]
-    bool test = false;
-
     private void Start()
     {
         for (int i = 0; i < Buttons.Length; i++)
@@ -39,43 +36,44 @@ public class ActiveBControl : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (test == false)
-            CancelBtnPostion();
-        if (e_active.Equals(E_Active.E_CANCEL)) { CancelAction(); }
-        else
-        {
-            if (GameMng.I.GetCode >= 15) { UnitsAction(); }
-            else if (GameMng.I.GetCode < 15 && GameMng.I.GetCode > 0) { BuiltAction(); }
-            else { CancelAction(); }
-        }
-    }
-
-    void CancelAction()
+    public void CancelAction()
     {
         for (int i = 0; i < Buttons.Length; i++)
         {
             Buttons[i].SetActive(false);
         }
     }
+
     /* 건물 클릭시 나타나는 버튼 */
-    void BuiltAction()
+    public void BuiltAction(E_CustomCode code)
     {
-        Buttons[Buttons.Length - 1].SetActive(true);
-        for (int i = 0; i < Buttons.Length - 1; i++)
+        switch (code)
         {
-            if (GameMng.I.GetCode.Equals(1))
-            {
-                if (i.Equals(0)) { Buttons[i].SetActive(true); }
-                else { Buttons[i].SetActive(false); }
-            }
+            case E_CustomCode.E_BUILDING:
+
+                break;
+            case E_CustomCode.E_CASTLE:
+                Buttons[0].SetActive(true);
+                Buttons[4].SetActive(true);
+                break;
+            default:
+
+                break;
         }
-        test = false;
+
+        //Buttons[Buttons.Length - 1].SetActive(true);
+        //for (int i = 0; i < Buttons.Length - 1; i++)
+        //{
+        //    if (GameMng.I.GetCode.Equals(1))
+        //    {
+        //        if (i.Equals(0)) { Buttons[i].SetActive(true); }
+        //        else { Buttons[i].SetActive(false); }
+        //    }
+        //}
     }
 
     /* 유닛 클릭시 나타나는 버튼 */
-    void UnitsAction()
+    public  void UnitsAction()
     {
         Buttons[Buttons.Length - 1].SetActive(true);
         for (int i = 0; i < Buttons.Length; i++)
@@ -89,7 +87,6 @@ public class ActiveBControl : MonoBehaviour
                 else { Buttons[i].SetActive(false); }
             }
         }
-        test = false;
     }
 
     public void CancelBtnPostion()
@@ -103,7 +100,6 @@ public class ActiveBControl : MonoBehaviour
 
         Result = (100 * (nBtnCount - 1));
         ButtonsRect[Buttons.Length - 1].localPosition = new Vector3(Result, 50, 0);
-        test = true;
 
         for (int i = Buttons.Length - 1; i > -1; i--)
         {
@@ -113,5 +109,35 @@ public class ActiveBControl : MonoBehaviour
                 ButtonsRect[i].localPosition = new Vector3(Result, 50, 0);
             }
         }
+    }
+
+
+    public void MakeWorkman()
+    {
+        if (GameMng.I.Minerals >= 50)
+        {
+            GameMng.I.Minerals -= 50;
+            //GameMng.I.produceworkman.BuildInit();
+            //GameMng.I.
+            GameMng.I.e_btnActive = E_Active.E_WORKMAN;
+        }
+    }
+    public void MoveBtn()
+    {
+        //GM.GameMng.I.e_active = E_Active.E_MOVE;
+    }
+    public void BuildBtn()
+    {
+        GameMng.I.e_btnActive = E_Active.E_BUILD;
+    }
+    public void AttackBtn()
+    {
+        //GM.GameMng.I.e_active = E_Active.E_ATTACK;
+    }
+    public void CancelBtn()
+    {
+        GameMng.I.e_btnActive = E_Active.E_NONE;
+        CancelAction();
+        //GM.GameMng.I.e_active = E_Active.E_CANCEL;
     }
 }

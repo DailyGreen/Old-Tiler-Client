@@ -124,14 +124,28 @@ public class HexMapEditor : MonoBehaviour {
 			if (Input.GetMouseButton(0)) {
 				HandleInput();
 				return;
-			}
-			if (Input.GetKeyDown(KeyCode.U)) {
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DestroyUnit();
+                }
+                else
+                {
+                    //CreateBuilt(E_CustomCode.E_BWORKMAN);
+                    GameMng.I.CreateBuilt(E_CustomCode.E_CASTLE);
+                }
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.U)) {
 				if (Input.GetKey(KeyCode.LeftShift)) {
 					DestroyUnit();
 				}
 				else {
-					CreateUnit();
-				}
+					//CreateUnit(E_CustomCode.E_WORKMAN);
+                    GameMng.I.CreateUnit(E_CustomCode.E_WORKMAN);
+                }
 				return;
             }
             if (Input.GetKeyDown(KeyCode.Y))
@@ -155,27 +169,27 @@ public class HexMapEditor : MonoBehaviour {
 			hexGrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
 	}
 
-    void CreateUnit()
-    {
-        HexCell cell = GetCellUnderCursor();
-        if (cell && !cell.Unit)
-        {
-            hexGrid.AddUnit(
-                Instantiate(HexUnit.unitPrefab), cell, Random.Range(0f, 360f)
-            );
-        }
-    }
+    //void CreateUnit(E_CustomCode code)
+    //{
+    //    HexCell cell = GetCellUnderCursor();
+    //    if (cell && !cell.Unit)
+    //    {
+    //        hexGrid.AddUnit(
+    //            Instantiate(HexUnit.unitPrefab), cell, Random.Range(0f, 360f)
+    //        );
+    //    }
+    //}
 
-    public void CreateBuilt(E_CustomCode e_custom)
+    /*public void CreateBuilt(E_CustomCode e_custom)
     {
         HexCell cell = GetCellUnderCursor();
         if (cell && !cell.Unit)
         {
             //if ((int)e_custom < 15) { cell.CustomCode = -1; }    // 건설중인 코드(보류)
-            cell.CustomCode = (int)e_custom;
-            hexGrid.AddBuilt(Instantiate(HexUnit.builtPrefab), cell, 0);
+            //cell.CustomCode = (int)e_custom;
+            hexGrid.AddBuilt(Instantiate(HexUnit.builtPrefab), cell, 0, e_custom);
         }
-    }
+    }*/
 
     void DestroyUnit () {
 		HexCell cell = GetCellUnderCursor();

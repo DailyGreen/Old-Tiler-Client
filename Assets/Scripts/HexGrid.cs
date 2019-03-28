@@ -56,21 +56,36 @@ public class HexGrid : MonoBehaviour {
 		CreateMap(cellCountX, cellCountZ, wrapping);
 	}
 
-	public void AddUnit (HexUnit unit, HexCell location, float orientation) {
+	public void AddUnit (HexUnit unit, HexCell location, float orientation, E_CustomCode code) {
 		units.Add(unit);
         unit.imStatic = false;
 		unit.Grid = this;
 		unit.Location = location;
 		unit.Orientation = orientation;
+        unit.code = code;
 	}
 
-    public void AddBuilt(HexUnit built, HexCell location, float orientation)
+    public void AddBuilt(HexUnit built, HexCell location, float orientation, E_CustomCode code)
     {
         builts.Add(built);
         built.imStatic = true;
         built.Grid = this;
         built.Location = location;
         built.Orientation = orientation;
+        built.code = code;
+        //switch (code)
+        //{
+        //    case E_CustomCode.E_CASTLE:
+        //        built.VisionRange = 4;
+        //        //built.Speed = 0;
+        //        Debug.Log("VISION RANGE CHANGE");
+        //        break;
+        //    default:
+        //        built.VisionRange = 0;
+        //        //built.Speed = 0;
+        //        Debug.Log("SOMETHING WRONG");
+        //        break;
+        //}
     }
 
     public void RemoveUnit (HexUnit unit) {
@@ -329,7 +344,7 @@ public class HexGrid : MonoBehaviour {
 		List<HexCell> path = ListPool<HexCell>.Get();
 		for (HexCell c = currentPathTo; c != currentPathFrom; c = c.PathFrom) {
 			path.Add(c);
-            Debug.Log("POSITION : " + c.coordinates);
+            //Debug.Log("POSITION : " + c.coordinates);
 		}
 		path.Add(currentPathFrom);
 		path.Reverse();
@@ -357,7 +372,6 @@ public class HexGrid : MonoBehaviour {
 
     public void ClearBuiltTempObj()
     {
-        Debug.Log("OUT");
         for (int i = 0; i < builtTempObj.Length; i++)
         {
             builtTempObj[0].transform.position = new Vector3(0, -100, 0);
@@ -370,66 +384,31 @@ public class HexGrid : MonoBehaviour {
     [SerializeField]
     GameObject[] builtTempObj;
 
-	void ShowPath (int speed) {
-        Debug.Log("SHOW PATH");
-        if (HexGameUI.wantToBuilt)
+	void ShowPath (int speed)
+    {
+        int counting = 0;
+        if (currentPathExists)
         {
-            int counting = 0;
-            if (currentPathExists)
+            HexCell current = currentPathTo;
+            while (current != currentPathFrom)
             {
-                HexCell current = currentPathTo;
-                while (current != currentPathFrom)
-                {
-                    int turn = (current.Distance - 1) / speed;
-                    current.SetLabel(turn.ToString());
-                    //current.EnableHighlight(Color.white);
-                    current = current.PathFrom;
-                    counting++;
-                }
-            }
-            currentPathFrom.EnableHighlight(Color.blue);
-            // 갈수있는 거리 + 1
-            if (counting >= 2)
-            {
-                // 사라질때
-                ClearPath();
-                builtTempObj[0].transform.position = new Vector3(0, -100, 0);
-                builtTempObj[0].transform.SetParent(builtTempObjParent.transform);
-            }
-            else
-            {
-                currentPathTo.EnableHighlight(Color.yellow);
-                builtTempObj[0].transform.position = currentPathTo.transform.position;
-                builtTempObj[0].transform.SetParent(currentPathTo.transform.parent);
+                int turn = (current.Distance - 1) / speed;
+                current.SetLabel(turn.ToString());
+                current.EnableHighlight(Color.white);
+                current = current.PathFrom;
+                counting++;
             }
         }
+        currentPathFrom.EnableHighlight(Color.blue);
+        // 갈수있는 거리 + 1
+        if (counting > (speed/4 - 1))
+            //currentPathTo.EnableHighlight(Color.red);
+            ClearPath();
         else
-        {
-            int counting = 0;
-            if (currentPathExists)
-            {
-                HexCell current = currentPathTo;
-                while (current != currentPathFrom)
-                {
-                    int turn = (current.Distance - 1) / speed;
-                    current.SetLabel(turn.ToString());
-                    current.EnableHighlight(Color.white);
-                    current = current.PathFrom;
-                    counting++;
-                }
-            }
-            currentPathFrom.EnableHighlight(Color.blue);
-            // 갈수있는 거리 + 1
-            if (counting >= 4)
-                //currentPathTo.EnableHighlight(Color.red);
-                ClearPath();
-            else
-                currentPathTo.EnableHighlight(Color.green);
-        }
-	}
+            currentPathTo.EnableHighlight(Color.green);
+    }
 
     public void FindPath (HexCell fromCell, HexCell toCell, HexUnit unit) {
-        Debug.Log("FINDING");
 		ClearPath();
 		currentPathFrom = fromCell;
 		currentPathTo = toCell;

@@ -37,14 +37,14 @@ public class HexGridChunk : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-        Debug.Log("LATE UPDATE");
+        //Debug.Log("LATE UPDATE");
 		Triangulate();
 		enabled = false;
 	}
 
 	public void Triangulate ()
     {
-        Debug.Log("Triangulate");
+        //Debug.Log("Triangulate");
         terrain.Clear();
 		rivers.Clear();
 		roads.Clear();
@@ -66,7 +66,7 @@ public class HexGridChunk : MonoBehaviour {
 
 	void Triangulate (HexCell cell)
     {
-        Debug.Log("Triangulate cell");
+        //Debug.Log("Triangulate cell");
         for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++) {
 			Triangulate(d, cell);
 		}
