@@ -27,6 +27,7 @@ public class HexUnit : MonoBehaviour {
 			location = value;
             //if (!imStatic)
 		    value.Unit = this;
+            // 시야 보여주는 함수. 적일 경우 이 함수가 호출되지 않게 해주면 됨
 			Grid.IncreaseVisibility(value, VisionRange);
 			transform.localPosition = value.Position;
 			Grid.MakeChildOfColumn(transform, value.ColumnIndex);
@@ -68,8 +69,9 @@ public class HexUnit : MonoBehaviour {
 
 	public bool IsValidDestination (HexCell cell) {
         // 경로 찾는 함수
-		//return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
-        return cell.IsExplored && !cell.IsUnderwater;
+        return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
+        // cell.Unit.imStatic
+        //return cell.IsExplored && !cell.IsUnderwater;
     }
 
 	public void Travel (List<HexCell> path)

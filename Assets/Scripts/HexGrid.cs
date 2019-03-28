@@ -354,21 +354,82 @@ public class HexGrid : MonoBehaviour {
 		currentPathFrom = currentPathTo = null;
 	}
 
+
+    public void ClearBuiltTempObj()
+    {
+        Debug.Log("OUT");
+        for (int i = 0; i < builtTempObj.Length; i++)
+        {
+            builtTempObj[0].transform.position = new Vector3(0, -100, 0);
+            builtTempObj[i].transform.SetParent(builtTempObjParent.transform);
+        }
+    }
+
+    [SerializeField]
+    GameObject builtTempObjParent;
+    [SerializeField]
+    GameObject[] builtTempObj;
+
 	void ShowPath (int speed) {
-		if (currentPathExists) {
-			HexCell current = currentPathTo;
-			while (current != currentPathFrom) {
-				int turn = (current.Distance - 1) / speed;
-				current.SetLabel(turn.ToString());
-				current.EnableHighlight(Color.white);
-				current = current.PathFrom;
-			}
-		}
-		currentPathFrom.EnableHighlight(Color.blue);
-		currentPathTo.EnableHighlight(Color.red);
+        Debug.Log("SHOW PATH");
+        if (HexGameUI.wantToBuilt)
+        {
+            int counting = 0;
+            if (currentPathExists)
+            {
+                HexCell current = currentPathTo;
+                while (current != currentPathFrom)
+                {
+                    int turn = (current.Distance - 1) / speed;
+                    current.SetLabel(turn.ToString());
+                    //current.EnableHighlight(Color.white);
+                    current = current.PathFrom;
+                    counting++;
+                }
+            }
+            currentPathFrom.EnableHighlight(Color.blue);
+            // 갈수있는 거리 + 1
+            if (counting >= 2)
+            {
+                // 사라질때
+                ClearPath();
+                builtTempObj[0].transform.position = new Vector3(0, -100, 0);
+                builtTempObj[0].transform.SetParent(builtTempObjParent.transform);
+            }
+            else
+            {
+                currentPathTo.EnableHighlight(Color.yellow);
+                builtTempObj[0].transform.position = currentPathTo.transform.position;
+                builtTempObj[0].transform.SetParent(currentPathTo.transform.parent);
+            }
+        }
+        else
+        {
+            int counting = 0;
+            if (currentPathExists)
+            {
+                HexCell current = currentPathTo;
+                while (current != currentPathFrom)
+                {
+                    int turn = (current.Distance - 1) / speed;
+                    current.SetLabel(turn.ToString());
+                    current.EnableHighlight(Color.white);
+                    current = current.PathFrom;
+                    counting++;
+                }
+            }
+            currentPathFrom.EnableHighlight(Color.blue);
+            // 갈수있는 거리 + 1
+            if (counting >= 4)
+                //currentPathTo.EnableHighlight(Color.red);
+                ClearPath();
+            else
+                currentPathTo.EnableHighlight(Color.green);
+        }
 	}
 
-	public void FindPath (HexCell fromCell, HexCell toCell, HexUnit unit) {
+    public void FindPath (HexCell fromCell, HexCell toCell, HexUnit unit) {
+        Debug.Log("FINDING");
 		ClearPath();
 		currentPathFrom = fromCell;
 		currentPathTo = toCell;

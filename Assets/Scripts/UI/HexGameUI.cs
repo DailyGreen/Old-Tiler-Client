@@ -8,7 +8,8 @@ public class HexGameUI : MonoBehaviour {
 	HexCell currentCell;
 
 	HexUnit selectedUnit;
-
+    public static bool wantToBuilt = false;
+    
 	public void SetEditMode (bool toggle) {
 		enabled = !toggle;
 		grid.ShowUI(!toggle);
@@ -22,18 +23,25 @@ public class HexGameUI : MonoBehaviour {
 	}
 
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            wantToBuilt = !wantToBuilt;
+        }
 		if (!EventSystem.current.IsPointerOverGameObject()) {
 			if (Input.GetMouseButtonDown(0)) {
 				DoSelection();
 			}
-			else if (selectedUnit) {
-				if (Input.GetMouseButtonDown(1)) {
-					DoMove();
-				}
-				else {
-					DoPathfinding();
-				}
-			}
+			else if (selectedUnit)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    DoMove();
+                }
+                else
+                {
+                    DoPathfinding();
+                }
+            }
 		}
 	}
 
@@ -55,6 +63,7 @@ public class HexGameUI : MonoBehaviour {
 			}
 			else {
 				grid.ClearPath();
+                grid.ClearBuiltTempObj();
 			}
 		}
 	}
