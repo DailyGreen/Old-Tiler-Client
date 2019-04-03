@@ -606,15 +606,39 @@ public class HexCell : MonoBehaviour {
 	public void DisableHighlight () {
 		Image highlight = uiRect.GetChild(0).GetComponent<Image>();
 		highlight.enabled = false;
-	}
+    }
+    public void DisableHighlight_1()
+    {
+        Image highlight = uiRect.GetChild(1).GetComponent<Image>();
+        highlight.enabled = false;
+    }
+    public void DisableHighlight_2()
+    {
+        Image highlight = uiRect.GetChild(2).GetComponent<Image>();
+        highlight.enabled = false;
+    }
 
-	public void EnableHighlight (Color color) {
+    public void EnableHighlight (Color color) {
 		Image highlight = uiRect.GetChild(0).GetComponent<Image>();
 		highlight.color = color;
 		highlight.enabled = true;
-	}
+    }
+    public void EnableHighlight_1(Color color)
+    {
+        Image highlight = uiRect.GetChild(1).GetComponent<Image>();
+        highlight.color = color;
+        highlight.enabled = true;
+    }
+    public void EnableHighlight_2(Color32 color)
+    {
+        Image highlight = uiRect.GetChild(2).GetComponent<Image>();
+        color.a = 100;
+        highlight.color =  color;
+        Debug.Log(color);
+        highlight.enabled = true;
+    }
 
-	public void SetMapData (float data) {
+    public void SetMapData (float data) {
 		ShaderData.SetMapData(this, data);
 	}
 }

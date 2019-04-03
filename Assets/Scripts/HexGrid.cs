@@ -357,14 +357,16 @@ public class HexGrid : MonoBehaviour {
 			while (current != currentPathFrom) {
 				current.SetLabel(null);
 				current.DisableHighlight();
-				current = current.PathFrom;
+                current.DisableHighlight_1();
+                current = current.PathFrom;
 			}
 			current.DisableHighlight();
-			currentPathExists = false;
+            current.DisableHighlight_1();
+            currentPathExists = false;
 		}
 		else if (currentPathFrom) {
-			currentPathFrom.DisableHighlight();
-			currentPathTo.DisableHighlight();
+			currentPathFrom.DisableHighlight_1();
+			currentPathTo.DisableHighlight_1();
 		}
 		currentPathFrom = currentPathTo = null;
 	}
@@ -399,13 +401,13 @@ public class HexGrid : MonoBehaviour {
                 counting++;
             }
         }
-        currentPathFrom.EnableHighlight(Color.blue);
+        currentPathFrom.EnableHighlight_1(Color.white);
         // 갈수있는 거리 + 1
         if (counting > (speed/4 - 1))
             //currentPathTo.EnableHighlight(Color.red);
             ClearPath();
         else
-            currentPathTo.EnableHighlight(Color.green);
+            currentPathTo.EnableHighlight_1(Color.white);
     }
 
     public void FindPath (HexCell fromCell, HexCell toCell, HexUnit unit) {

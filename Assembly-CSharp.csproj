@@ -149,6 +149,8 @@
     <Compile Include="Assets\Scripts\Manager\RoomMng.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundMng.cs" />
     <Compile Include="Assets\Scripts\Object\Built\Castle.cs" />
+    <Compile Include="Assets\Scripts\Object\Built\Farm.cs" />
+    <Compile Include="Assets\Scripts\Object\Built\FarmWareHouse.cs" />
     <Compile Include="Assets\Scripts\Object\Character\WorkMan.cs" />
     <Compile Include="Assets\Scripts\Object\HexUnit.cs" />
     <Compile Include="Assets\Scripts\Object\SCharacter.cs" />
